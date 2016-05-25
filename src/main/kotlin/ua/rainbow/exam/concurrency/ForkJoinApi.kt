@@ -2,30 +2,42 @@ package ua.rainbow.exam.concurrency
 
 import java.util.concurrent.ForkJoinPool
 import java.util.concurrent.RecursiveAction
-
-/**
- * Created by Shadowgun on 23.05.16.
- */
-
+import java.util.concurrent.RecursiveTask
 
 class ForkJoinApi {
     fun test() {
-        ForkJoinPool().submit(ZooTask(DoubleArray(25, { it.toDouble() }))).get();
+        ForkJoinPool().invoke(ZooAction(DoubleArray(25, { it.toDouble() })));
+    }
+
+    fun testSum() {
+        println("Result sum = ${ForkJoinPool().submit(ZooTask(DoubleArray(25, { it.toDouble() }))).join()}")
     }
 }
 
-class ZooTask(private val something: DoubleArray) : RecursiveAction() {
+class ZooAction(private val something: DoubleArray) : RecursiveAction() {
     override fun compute() {
         when {
             something.size > 3 -> invokeAll(
-                    ZooTask(something.sliceArray(0..(something.size / 2))),
-                    ZooTask(something.sliceArray((something.size / 2 + 1)..(something.size - 1)))
+                    ZooAction(something.sliceArray(0..(something.size / 2))),
+                    ZooAction(something.sliceArray((something.size / 2 + 1)..(something.size - 1)))
             );
-            else -> something.forEach { println("Action hash: ${hashCode()}; Val: $it;") }
+            else -> something.forEach { println("Thread id: ${Thread.currentThread().toString()}; Action hash: ${hashCode()}; Val: $it;") }
+        }
+    }
+}
+
+class ZooTask(private val something: DoubleArray) : RecursiveTask<Double>() {
+    override fun compute(): Double {
+        return when {
+            something.size > 3 ->
+                ZooTask(something.sliceArray((something.size / 2 + 1)..(something.size - 1))).fork().run { ZooTask(something.sliceArray(0..(something.size / 2))).compute() + this.join() };
+            else -> something.sum();
         }
     }
 }
 
 fun main(args: Array<String>) {
     ForkJoinApi().test();
+    println("---------------------------------------------------");
+    ForkJoinApi().testSum();
 }
