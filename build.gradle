@@ -2,7 +2,7 @@ group 'ua.rainbow.exam'
 version '1.0-SNAPSHOT'
 
 buildscript {
-    ext.kotlin_version = '1.0.2'
+    ext.kotlin_version = '1.0.5'
     repositories {
         mavenCentral()
     }
@@ -14,7 +14,7 @@ buildscript {
 apply plugin: 'java'
 apply plugin: 'kotlin'
 
-sourceCompatibility = 1.5
+sourceCompatibility = 1.8
 
 repositories {
     mavenCentral()
