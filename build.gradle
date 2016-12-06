@@ -2,7 +2,7 @@ group 'ua.rainbow.exam'
 version '1.0-SNAPSHOT'
 
 buildscript {
-    ext.kotlin_version = '1.0.2'
+    ext.kotlin_version = '1.0.5'
     repositories {
         mavenCentral()
     }
