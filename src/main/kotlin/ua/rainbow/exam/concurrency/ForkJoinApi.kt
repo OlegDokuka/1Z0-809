@@ -1,4 +1,4 @@
-package ua.rainbow.exam.concurrency
+ package ua.rainbow.exam.concurrency
 
 import java.util.concurrent.ForkJoinPool
 import java.util.concurrent.RecursiveAction
@@ -6,7 +6,7 @@ import java.util.concurrent.RecursiveTask
 
 class ForkJoinApi {
     fun test() {
-        ForkJoinPool().invoke(ZooAction(DoubleArray(25, { it.toDouble() })));
+        ForkJoinPool().invoke(ZooAction(DoubleArray(25, Int::toDouble)));
     }
 
     fun testSum() {

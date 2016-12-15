@@ -95,6 +95,19 @@ class ParallelStreamApi {
         println("Take ${System.currentTimeMillis() - start} ms");
     }
 
+    fun reducingWithStringBuilder() {
+        val start = System.currentTimeMillis();
+        val result = Stream.of('T', 'h', 'e', 'r', 'e', ' ', 'i', 's', ' ', 'm', 'o', 'r', 'e', ' ', 'd', 'i', 'f', 'f', 'i', 'c', 'u', 'l', 't', ' ', 't', 'h', 'a', 'n', ' ', 'i', 't', ' ', 's', 'e', 'e', 'm', 's', ' ', 't', 'o', ' ', 'b', 'e')
+                .unordered()
+                .parallel()
+                .unordered()
+                .reduce("", { idt, v -> StringBuilder().append(idt).append(v) }, { st1, st2 -> st1.append(st2) })
+
+        println("Result of reducing is '$result'");
+        println("\n----------------------------3 Args Reducing--------------------------------------")
+        println("Take ${System.currentTimeMillis() - start} ms");
+    }
+
     fun reducing2() {
         val start = System.currentTimeMillis();
         val result = Stream.of('T', 'h', 'e', 'r', 'e', ' ', 'i', 's', ' ', 'm', 'o', 'r', 'e', ' ', 'd', 'i', 'f', 'f', 'i', 'c', 'u', 'l', 't', ' ', 't', 'h', 'a', 'n', ' ', 'i', 't', ' ', 's', 'e', 'e', 'm', 's', ' ', 't', 'o', ' ', 'b', 'e')
