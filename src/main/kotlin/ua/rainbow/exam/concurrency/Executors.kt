@@ -102,6 +102,15 @@ class PerformanceCollections {
 
 }
 
+fun scheduledExecutorTest(){
+    val executor = Executors.newSingleThreadScheduledExecutor()
+
+    executor.schedule({
+        println("hello")
+        Thread.sleep(5)
+    null}, 10, TimeUnit.SECONDS)
+}
+
 fun main(args: Array<String>) {
     AddData().main();
 

@@ -21,7 +21,7 @@ class ZooAction(private val something: DoubleArray) : RecursiveAction() {
                     ZooAction(something.sliceArray(0..(something.size / 2))),
                     ZooAction(something.sliceArray((something.size / 2 + 1)..(something.size - 1)))
             );
-            else -> something.forEach { println("Thread id: ${Thread.currentThread().toString()}; Action hash: ${hashCode()}; Val: $it;") }
+            else -> something.forEach { println("Thread id: ${Thread.currentThread()}; Action hash: ${hashCode()}; Val: $it;") }
         }
     }
 }

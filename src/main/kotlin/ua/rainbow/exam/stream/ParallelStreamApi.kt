@@ -101,7 +101,7 @@ class ParallelStreamApi {
                 .unordered()
                 .parallel()
                 .unordered()
-                .reduce("", { idt, v -> StringBuilder().append(idt).append(v) }, { st1, st2 -> st1.append(st2) })
+                .reduce(StringBuilder(), { idt, v -> StringBuilder().append(idt).append(v) }, StringBuilder::append)
 
         println("Result of reducing is '$result'");
         println("\n----------------------------3 Args Reducing--------------------------------------")
@@ -130,6 +130,7 @@ fun main(args: Array<String>) {
     ParallelStreamApi().runWithCustomForkJoinPool();
 
     ParallelStreamApi().reducing();
+    ParallelStreamApi().reducingWithStringBuilder();
     ParallelStreamApi().reducing2();
     ParallelStreamApi().reducing();
     ParallelStreamApi().reducing2();
