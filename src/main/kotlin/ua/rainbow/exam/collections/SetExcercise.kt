@@ -2,7 +2,7 @@ package ua.rainbow.exam.collections;
 
 import java.util.*
 
-fun testNavigableSet() {
+private fun testNavigableSet() {
     val set = TreeSet<Int>()
 
     set.add(1)
