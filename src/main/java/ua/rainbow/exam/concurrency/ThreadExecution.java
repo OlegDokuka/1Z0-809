@@ -7,6 +7,6 @@ public class ThreadExecution {
     }
 
     private static void createThreadWithLambda() {
-//   invalid there is a return type     new Thread(()->5);
+        new Thread(()->new String(""));
     }
 }

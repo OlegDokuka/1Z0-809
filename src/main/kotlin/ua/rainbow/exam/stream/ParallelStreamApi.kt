@@ -30,6 +30,14 @@ class ParallelStreamApi {
         }.get()
     }
 
+    fun runWithCustomForkJoinPoolOverSystemProps() {
+        System.setProperty(
+                "java.util.concurrent.ForkJoinPool.common.parallelism",
+                "${Runtime.getRuntime().availableProcessors() * 2}"
+        )
+        runSimple()
+    }
+
     fun collectToConccurentMap() {
         println(IntStream
                 .range(0, 100000)
@@ -81,6 +89,7 @@ class ParallelStreamApi {
         println("Take ${System.currentTimeMillis() - start} ms");
         println("\n--------------------------------------------------------------------")
     }
+
     // 3 Args reduce is faster then 2 args one
     fun reducing() {
         val start = System.currentTimeMillis();
@@ -125,9 +134,10 @@ class ParallelStreamApi {
 }
 
 fun main(args: Array<String>) {
-    ParallelStreamApi().runSimple();
-    ParallelStreamApi().runOrdered();
-    ParallelStreamApi().runWithCustomForkJoinPool();
+//    ParallelStreamApi().runSimple();
+//    ParallelStreamApi().runOrdered();
+//    ParallelStreamApi().runWithCustomForkJoinPool();
+    ParallelStreamApi().runWithCustomForkJoinPoolOverSystemProps();
 
     ParallelStreamApi().reducing();
     ParallelStreamApi().reducingWithStringBuilder();

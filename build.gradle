@@ -21,8 +21,10 @@ repositories {
 }
 
 dependencies {
-    testCompile group: 'junit', name: 'junit', version: '4.11'
+    compile group: 'com.h2database', name: 'h2', version: '1.4.193'
+    compile "io.javaslang:javaslang:2.1.0-alpha"
     compile "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
+    testCompile group: 'junit', name: 'junit', version: '4.11'
 }
 sourceSets {
     main.java.srcDirs += 'src/main/java'
