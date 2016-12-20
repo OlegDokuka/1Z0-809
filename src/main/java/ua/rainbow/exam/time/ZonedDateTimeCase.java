@@ -24,13 +24,21 @@ public class ZonedDateTimeCase {
 
     private static void timeTravaling() {
         LocalDate date = LocalDate.of(2017, Month.MARCH, 26);
+        LocalDate date1 = LocalDate.of(2016, Month.OCTOBER, 30);
         LocalTime time = LocalTime.of(3, 30);
+        LocalTime time1 = LocalTime.of(3, 30);
         LocalDateTime dateTime = LocalDateTime.of(date, time);
+        LocalDateTime dateTime1 = LocalDateTime.of(date1, time1);
         ZonedDateTime zonedDateTime = ZonedDateTime.of(date, time, ZoneId.systemDefault());
-        out.print("LocalDateTime is");
+        ZonedDateTime zonedDateTime1 = ZonedDateTime.of(date1, time1, ZoneId.systemDefault());
+        out.print("LocalDateTime is ");
         out.println(dateTime);
-        out.print("ZonedDateTime is");
+        out.print("ZonedDateTime is ");
         out.println(zonedDateTime);
+        out.print("LocalDateTime N is ");
+        out.println(dateTime1);
+        out.print("ZonedDateTime N is ");
+        out.println(zonedDateTime1);
     }
 
     public static void main(String... args) {
